@@ -6,21 +6,20 @@ import ToolBar from "../../components/Navigation/ToolBar/ToolBar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 
 class Layout extends Component {
+  // const [sideDrawerIsVisible, setSideDrawerIsVisible] = useState(false);
   state = {
-    showSideDrawer: false,
+    sideDrawerIsVisible: false,
   };
+
   closeBarHandler = () => {
-    this.setState({
-      showSideDrawer: false,
-    });
+    this.setState({ sideDrawerIsVisible: false });
   };
   sideDrawerTogglerHandler = () => {
     this.setState((prevState) => {
-      return { showSideDrawer: !prevState.showSideDrawer };
+      return { sideDrawerIsVisible: !prevState.sideDrawerIsVisible };
     });
   };
-
-  render(props) {
+  render() {
     return (
       <Aux>
         <ToolBar
@@ -29,7 +28,7 @@ class Layout extends Component {
         />
         <SideDrawer
           isAuth={this.props.isAuthenticated}
-          open={this.state.showSideDrawer}
+          open={this.state.sideDrawerIsVisible}
           closed={this.closeBarHandler}
         />
         <main className={classes.Content}>{this.props.children}</main>
@@ -37,6 +36,7 @@ class Layout extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.token !== null,
