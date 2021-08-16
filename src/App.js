@@ -3,7 +3,7 @@ import Layout from "./hoc/Layout/Layout";
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import asyncComponent from "./hoc/asyncComponent/asyncComponent";
+// import asyncComponent from "./hoc/asyncComponent/asyncComponent";
 import { withRouter } from "react-router-dom";
 import * as actions from "./store/actions/index";
 import Logout from "./containers/Auth/Logout/Logout";
@@ -14,7 +14,7 @@ const Checkout = React.lazy(() => {
 const Orders = React.lazy(() => {
   return import("./containers/orders/Orders");
 });
-const Auth = asyncComponent(() => {
+const Auth = React.lazy(() => {
   return import("./containers/Auth/Auth");
 });
 const App = (props) => {
