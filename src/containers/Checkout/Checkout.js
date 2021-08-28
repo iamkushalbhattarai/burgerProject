@@ -4,37 +4,35 @@ import ContactData from "./ContactData/ContactData";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-class Checkout extends Component {
-  checkoutCanceledHandler = () => {
-    this.props.history.goBack();
+const Checkout = (props) => {
+  const checkoutCanceledHandler = () => {
+    props.history.goBack();
   };
-  checkoutContinuedHandler = () => {
-    this.props.history.replace("/checkout/contact-data");
+  const checkoutContinuedHandler = () => {
+    props.history.replace("/checkout/contact-data");
   };
-  render() {
-    let summary = <Redirect to="/" />;
-    if (this.props.ing) {
-      const purchaseRedirect = this.props.purchased ? (
-        <Redirect to="/" />
-      ) : null;
-      summary = (
-        <div>
-          {purchaseRedirect}
-          <CheckoutSummary
-            ingredients={this.props.ing}
-            checkoutContinued={this.checkoutContinuedHandler}
-            checkoutCanceled={this.checkoutCanceledHandler}
-          />
-          <Route
-            path={this.props.match.path + "/contact-data"}
-            component={ContactData}
-          />
-        </div>
-      );
-    }
-    return summary;
+
+  let summary = <Redirect to="/" />;
+  if (props.ing) {
+    const purchaseRedirect = props.purchased ? <Redirect to="/" /> : null;
+    summary = (
+      <div>
+        {purchaseRedirect}
+        <CheckoutSummary
+          ingredients={props.ing}
+          checkoutContinued={checkoutContinuedHandler}
+          checkoutCanceled={checkoutCanceledHandler}
+        />
+        <Route
+          path={props.match.path + "/contact-data"}
+          component={ContactData}
+        />
+      </div>
+    );
   }
-}
+  return summary;
+};
+
 const mapStateToProps = (state) => {
   return {
     ing: state.burgerBuilder.ingredients,

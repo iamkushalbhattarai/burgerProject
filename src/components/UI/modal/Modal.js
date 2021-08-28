@@ -3,20 +3,12 @@ import classes from "./modal.module.css";
 import BackDrop from "../Backdrop/BackDrop";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 class Modal extends Component {
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return nextProps.show !== this.props.show;
-  // }
   shouldComponentUpdate(nextProps, nextState) {
     return (
       nextProps.show !== this.props.show ||
       nextProps.children !== this.props.children
     );
   }
-  // componentWillUpdate() {
-  //   console.log("model.js will update");
-  // }
-
-
   render() {
     return (
       <Aux>
